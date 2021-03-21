@@ -9,7 +9,11 @@ variable "profile" {
 
 variable "cluster_name" {
   type    = string
-  default = "devops-catalog1"
+  default = "eks-01"
+}
+variable "key_name" {
+  type    = string
+  default = "march"
 }
 variable "k8s_version" {
   type = string
@@ -18,7 +22,7 @@ variable "k8s_version" {
 
 variable "release_version" {
   type    = string
-  default = "1.18.9-20201211"
+  default = "1.18.9-20210125"
 }
 
 variable "min_node_count" {
@@ -28,7 +32,7 @@ variable "min_node_count" {
 
 variable "max_node_count" {
   type    = number
-  default = 5
+  default = 2
 }
 
 variable "machine_type" {
@@ -38,5 +42,5 @@ variable "machine_type" {
 
 variable "state_bucket" {
   type    = string
-  default = "tf-dmo"
+  default = "tf1-dmo"
 }

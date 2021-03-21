@@ -84,11 +84,17 @@ resource "aws_subnet" "worker" {
 resource "aws_eks_node_group" "primary" {
   cluster_name    = aws_eks_cluster.primary.name
   version         = var.k8s_version
-  release_version = var.release_version
+  #release_version = var.release_version
   node_group_name = "devops-catalog"
   node_role_arn   = aws_iam_role.worker.arn
   subnet_ids      = aws_subnet.worker[*].id
   instance_types  = [var.machine_type]
+
+  remote_access {
+
+    ec2_ssh_key               = var.key_name
+  }
+
   scaling_config {
     desired_size = var.min_node_count
     max_size     = var.max_node_count
@@ -194,8 +200,8 @@ resource "aws_route_table_association" "worker" {
   route_table_id = aws_route_table.worker.id
 }
 
-resource "aws_s3_bucket" "state" {
-  bucket = "tf-dmo"
-  acl = "private"
-###  region = var.region
-}
+#resource "aws_s3_bucket" "state" {
+#  bucket = "tf-dmo"
+#  acl = "private"
+#  region = var.region
+#}

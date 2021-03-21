@@ -1583,6 +1583,10 @@ serverFiles:
           - source_labels: [__meta_kubernetes_pod_phase]
             regex: Pending|Succeeded|Failed
             action: drop
+            
+      - job_name: 'demo'
+        target_groups:
+                - targets: ['elasticsearch-exporter-prometheus-elasticsearch-exporter:9108'] 
 
 # adds additional scrape configs to prometheus.yml
 # must be a string so you have to add a | after extraScrapeConfigs:
